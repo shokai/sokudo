@@ -1,0 +1,12 @@
+source 'http://rubygems.org'
+
+gem 'rack'
+gem 'sinatra'
+gem 'thin'
+gem 'extlib'
+gem 'sinatra-reloader'
+gem 'json'
+gem 'haml'
+gem 'bson'
+gem 'bson_ext'
+gem 'mongoid','>=2.2.0'
