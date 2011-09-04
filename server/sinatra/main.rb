@@ -1,8 +1,15 @@
 #!/usr/bin/env ruby
 # -*- coding: utf-8 -*-
 
+before do
+  @title = 'sokudo'
+end
+
 get '/' do
-  @mes = 'sokudo server'
+  locs = Location.desc(:time)
+  @locs_count = locs.count
+  @locs = locs.limit(40)
+  haml :location
 end
 
 post '/location' do
@@ -16,4 +23,3 @@ post '/location' do
     STDERR.puts e
   end
 end
-

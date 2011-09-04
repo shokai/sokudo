@@ -1,0 +1,20 @@
+!!!XHTML
+%html
+  %head
+    %title= @title
+  %body
+    %h1= @title
+    %div
+      #{@locs_count} locations
+    %ol#locations
+      - for i in 0...@locs.size-1 do
+        - loc_a = @locs[i]
+        - loc_b = @locs[i+1]
+        %li
+          %ul
+            %li lat : #{loc_a.lat}
+            %li lon : #{loc_a.lon}
+            %li time : #{Time.at loc_a.time}
+            %li speed : #{direction(loc_b, loc_a)} #{speed(loc_a, loc_b)} (km/h)
+            %li
+              %a{:href => "http://maps.google.com/?ie=UTF8&ll=#{loc_a.lat},#{loc_a.lon}&z=16"} google map
