@@ -12,9 +12,9 @@
         - loc_b = @locs[i+1]
         %li
           %ul
-            %li lat : #{loc_a.lat}
-            %li lon : #{loc_a.lon}
+            -# %li lat : #{loc_a.lat}
+            -# %li lon : #{loc_a.lon}
             %li time : #{Time.at loc_a.time}
             %li speed : #{direction(loc_b, loc_a)} #{speed(loc_a, loc_b)} (km/h)
-            %li
-              %a{:href => "http://maps.google.com/?ie=UTF8&ll=#{loc_a.lat},#{loc_a.lon}&z=16"} google map
+            -# %li
+            -#  %a{:href => "http://maps.google.com/?ie=UTF8&ll=#{loc_a.lat},#{loc_a.lon}&z=16"} google map
