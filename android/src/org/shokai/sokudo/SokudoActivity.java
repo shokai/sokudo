@@ -20,6 +20,7 @@ public class SokudoActivity extends Activity implements LocationListener{
 
     private TextView text_msg;
     private LocationManager lm;
+    private String server_addr;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,11 @@ public class SokudoActivity extends Activity implements LocationListener{
         text_msg = (TextView) this.findViewById(R.id.text_msg);
         lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 10, this);
+        server_addr = this.getResources().getString(R.string.server_addr);
         log("start");
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("message", "start");
+        post(this.server_addr+"/test", params);
     }
     
     private void message(String msg){
@@ -40,10 +45,16 @@ public class SokudoActivity extends Activity implements LocationListener{
         Log.v(this.getResources().getString(R.string.app_name), msg);
     }
 
-    private void post(HashMap<String, String> params){
-        String server_addr = this.getResources().getString(R.string.server_addr);
+    private void post_location(double lat, double lon){
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("lat", Double.toString(lat));
+        params.put("lon", Double.toString(lon));
+        post(this.server_addr+"/location", params);
+    }
+    
+    private void post(String url, HashMap<String, String> params){
         HttpClient client = new DefaultHttpClient();
-        HttpPost httppost = new HttpPost(server_addr);
+        HttpPost httppost = new HttpPost(url);
         List<NameValuePair> post_params = new ArrayList<NameValuePair>();
         Iterator<String> i = params.keySet().iterator();
         while(i.hasNext()){
@@ -66,10 +77,7 @@ public class SokudoActivity extends Activity implements LocationListener{
         double lat = location.getLatitude();
         double lon = location.getLongitude();
         message("lat:"+Double.toString(lat) + ", lon:" + Double.toString(lon));
-        HashMap<String, String> params = new HashMap<String, String>();
-        params.put("lat", Double.toString(lat));
-        params.put("lon", Double.toString(lon));
-        post(params);
+        post_location(lat, lon);
     }
 
     public void onProviderDisabled(String provider) {
