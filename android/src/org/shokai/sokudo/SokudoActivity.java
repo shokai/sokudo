@@ -28,7 +28,7 @@ public class SokudoActivity extends Activity implements LocationListener{
         setContentView(R.layout.main);
         text_msg = (TextView) this.findViewById(R.id.text_msg);
         lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 10, this);
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 600000, 1000, this);
         server_addr = this.getResources().getString(R.string.server_addr);
         log("start");
         HashMap<String, String> params = new HashMap<String, String>();

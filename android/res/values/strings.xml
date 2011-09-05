@@ -2,5 +2,5 @@
 <resources>
     <string name="hello">Hello World, SokudoActivity!</string>
     <string name="app_name">Sokudo</string>
-    <string name="server_addr">http://192.168.1.38:8127</string>
+    <string name="server_addr">http://sokudo.shokai.org</string>
 </resources>
